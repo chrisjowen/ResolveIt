@@ -1,0 +1,19 @@
+﻿<Window x:Class="ResolveIt.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:ResolveIt.UI.TreeControl"
+        Title="MainWindow" Height="350" Width="600">
+        <DockPanel LastChildFill="True">
+            <Border Height="25" MaxHeight="25" MinHeight="25" Background="LemonChiffon" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Bottom">
+                <TextBlock Foreground="Black">Dock = "Bottom"</TextBlock>
+            </Border>
+            <Border MinWidth="200" Background="PaleGreen" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Left">
+                <TextBlock Foreground="Black">
+                    <Controls:SolutionTreeView ></Controls:SolutionTreeView>                    
+                </TextBlock>
+            </Border>
+            <Border Background="White" BorderBrush="Black" BorderThickness="1">
+                <TextBlock Foreground="Black">This content will "Fill" the remaining space</TextBlock>
+            </Border>
+        </DockPanel>
+</Window>

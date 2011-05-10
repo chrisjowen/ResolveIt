@@ -1,0 +1,9 @@
+﻿using ICSharpCode.NRefactory.Ast;
+
+namespace WellItCouldWork.Tests
+{
+    public class CompileMe
+    {
+        private CompilationUnit cu;
+    }
+}

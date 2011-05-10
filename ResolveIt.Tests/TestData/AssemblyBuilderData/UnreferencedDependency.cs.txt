@@ -1,0 +1,7 @@
+﻿namespace WellItCouldWork.Tests.TestData.AssemblyBuilderData
+{
+    public class EmptyClass
+    {
+		private UnknownClass unknownClass;
+    }
+}

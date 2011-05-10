@@ -1,0 +1,6 @@
+﻿namespace WellItCouldWork.Tests.TestData.AssemblyBuilderData
+{
+    public class EmptyClass
+    {
+    }
+}

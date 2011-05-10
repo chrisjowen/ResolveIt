@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A184FA5D-4B8B-4524-9E64-DD31265CA5E1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ResolveIt.Core</RootNamespace>
+    <AssemblyName>ResolveIt.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.NRefactory">
+      <HintPath>..\WellItCouldWork\Libs\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Investigation\CodeFileLoader.cs" />
+    <Compile Include="Investigation\IExamineSourceCodeForDependencies.cs" />
+    <Compile Include="Investigation\ILoadProjectInfo.cs" />
+    <Compile Include="Investigation\ILoadSolutionInfo.cs" />
+    <Compile Include="Exceptions\InvalidProjectFileComplaint.cs" />
+    <Compile Include="Investigation\NodeExt.cs" />
+    <Compile Include="Investigation\NRefactorySourceCodeExaminer.cs" />
+    <Compile Include="Investigation\ProjectLoader.cs" />
+    <Compile Include="Investigation\SolutionLoader.cs" />
+    <Compile Include="Investigation\TypeFactory.cs" />
+    <Compile Include="Model\DependencyInfo.cs" />
+    <Compile Include="Model\CodeFileInfo.cs" />
+    <Compile Include="Model\IDependencyInfo.cs" />
+    <Compile Include="Model\ICodeFileInfo.cs" />
+    <Compile Include="Model\IProjectInfo.cs" />
+    <Compile Include="Model\ISolutionInfo.cs" />
+    <Compile Include="Model\ProjectInfo.cs" />
+    <Compile Include="Model\ReferenceInfo.cs" />
+    <Compile Include="Model\SolutionInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SyntaxHelpers\GenericListExtensions.cs" />
+    <Compile Include="SyntaxHelpers\TypeExt.cs" />
+    <Compile Include="SyntaxHelpers\XElementExt.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
