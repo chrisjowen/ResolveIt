@@ -44,18 +44,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Investigation\CodeFileLoader.cs" />
-    <Compile Include="Investigation\IExamineSourceCodeForDependencies.cs" />
+    <Compile Include="Investigation\DeclerationComparer.cs" />
+    <Compile Include="Investigation\NRefactoryDependencyExaminer.cs" />
+    <Compile Include="Investigation\IDependencyInfo.cs" />
+    <Compile Include="Investigation\IExamineSourceCodeForDeclerations.cs" />
     <Compile Include="Investigation\ILoadProjectInfo.cs" />
     <Compile Include="Investigation\ILoadSolutionInfo.cs" />
     <Compile Include="Exceptions\InvalidProjectFileComplaint.cs" />
     <Compile Include="Investigation\NodeExt.cs" />
-    <Compile Include="Investigation\NRefactorySourceCodeExaminer.cs" />
+    <Compile Include="Investigation\NRefactoryDeclerationExaminer.cs" />
     <Compile Include="Investigation\ProjectLoader.cs" />
     <Compile Include="Investigation\SolutionLoader.cs" />
     <Compile Include="Investigation\TypeFactory.cs" />
-    <Compile Include="Model\DependencyInfo.cs" />
+    <Compile Include="Model\DeclerationInfo.cs" />
     <Compile Include="Model\CodeFileInfo.cs" />
-    <Compile Include="Model\IDependencyInfo.cs" />
+    <Compile Include="Model\IDeclerationInfo.cs" />
     <Compile Include="Model\ICodeFileInfo.cs" />
     <Compile Include="Model\IProjectInfo.cs" />
     <Compile Include="Model\ISolutionInfo.cs" />

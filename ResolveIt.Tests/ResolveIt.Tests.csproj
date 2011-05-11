@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Investigation\CodeFileLoaderTests.cs" />
     <Compile Include="Investigation\NRefactoryClassExaminerTests.cs" />
+    <Compile Include="Investigation\NRefactoryDependencyExaminerTests.cs" />
     <Compile Include="Investigation\ProjectLoaderTests.cs" />
     <Compile Include="Investigation\SolutionLoaderTests.cs" />
     <Compile Include="Model\ClassDefenitionTests.cs" />
@@ -58,7 +59,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="TestSyntaxHelpers\BuildFilesExt.cs" />
-    <Compile Include="TestSyntaxHelpers\TypeInfoListExt.cs" />
+    <Compile Include="TestSyntaxHelpers\DeclerationsExt.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ResolveIt.Core\ResolveIt.Core.csproj">

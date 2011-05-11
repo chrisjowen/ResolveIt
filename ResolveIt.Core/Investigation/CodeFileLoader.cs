@@ -5,21 +5,20 @@ namespace ResolveIt.Core.Investigation
 {
     public class CodeFileLoader : ILoadCodeFileInfo
     {
-        private readonly IExamineSourceCodeForDependencies dependencyInfoLoader;
+        private readonly IExamineSourceCodeForDeclerations declerationInfoLoader;
 
-        public CodeFileLoader(IExamineSourceCodeForDependencies dependencyInfoLoader)
+        public CodeFileLoader(IExamineSourceCodeForDeclerations declerationInfoLoader)
         {
-            this.dependencyInfoLoader = dependencyInfoLoader;
+            this.declerationInfoLoader = declerationInfoLoader;
         }
 
         public ICodeFileInfo FromFile(FileInfo file)
         {
             var codeFile =  new CodeFileInfo(file.Name, file.DirectoryName);
+            var declerations = declerationInfoLoader.ExamineSource(codeFile);
 
-            var dependencies = dependencyInfoLoader.ExamineSource(codeFile);
-
-            foreach (var dependencyInfo in dependencies)
-                codeFile.AddDependency(dependencyInfo);  
+            foreach (var decleration in declerations)
+                codeFile.AddDecleration(decleration);  
 
             return codeFile;
         }

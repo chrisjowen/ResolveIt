@@ -7,6 +7,11 @@ namespace ResolveIt.Core.Model
         public string Path { get; private set; }
         public string Name { get; private set; }
 
+        public bool IsExternal
+        {
+            get { return !String.IsNullOrEmpty(Path); }
+        }
+
         public ReferenceInfo(string name, string path)
         {
             Name = name;
@@ -22,5 +27,6 @@ namespace ResolveIt.Core.Model
     public interface IReferenceInfo
     {
         string Name { get; }
+        bool IsExternal { get; }
     }
 }

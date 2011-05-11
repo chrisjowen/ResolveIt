@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 
@@ -7,14 +6,19 @@ namespace ResolveIt.Core.Model
 {
     public class CodeFileInfo : ICodeFileInfo
     {
-        private readonly IList<IDependencyInfo> dependencies = new List<IDependencyInfo>();
+        private readonly IList<IDeclerationInfo> declerations = new List<IDeclerationInfo>();
         public string Name { get; private set; }
         public string Path { get; private set; }
         public ProjectInfo Project { get; set; }
 
-        public IList<IDependencyInfo> Dependencies
+        public ISolutionInfo Solution
         {
-            get { return new ReadOnlyCollection<IDependencyInfo>(dependencies); }
+            get { return Project.Solution; }
+        }
+
+        public IList<IDeclerationInfo> Declerations
+        {
+            get { return new ReadOnlyCollection<IDeclerationInfo>(declerations); }
         }
 
         public FileInfo AsFile()
@@ -38,9 +42,9 @@ namespace ResolveIt.Core.Model
             Path = path;
         }
 
-        public void AddDependency(IDependencyInfo dependency)
+        public void AddDecleration(IDeclerationInfo decleration)
         {
-            dependencies.Add(dependency);
+            declerations.Add(decleration);
         }
     }
 }

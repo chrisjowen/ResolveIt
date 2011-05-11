@@ -55,10 +55,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="TreeControl\Domain\SolutionModel.cs" />
-    <Compile Include="TreeControl\SolutionTreeView.xaml.cs">
+    <Compile Include="ApplicationWiringFactory.cs" />
+    <Compile Include="DependencyViewer.xaml.cs">
+      <DependentUpon>DependencyViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SolutionTreeView.xaml.cs">
       <DependentUpon>SolutionTreeView.xaml</DependentUpon>
     </Compile>
+    <Page Include="DependencyViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -71,7 +78,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="TreeControl\SolutionTreeView.xaml">
+    <Page Include="SolutionTreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -99,6 +106,12 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ResolveIt.Core\ResolveIt.Core.csproj">
+      <Project>{A184FA5D-4B8B-4524-9E64-DD31265CA5E1}</Project>
+      <Name>ResolveIt.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

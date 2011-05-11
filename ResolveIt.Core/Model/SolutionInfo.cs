@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using ResolveIt.Core.Investigation;
 
 namespace ResolveIt.Core.Model
 {
@@ -25,6 +28,10 @@ namespace ResolveIt.Core.Model
             get { return new List<IProjectInfo>(projects); }
         }
 
-
+        public ICodeFileInfo FindCodeFileFor(IDependencyInfo dependencyInfo)
+        {
+            return projects.SelectMany(p => p.CodeFiles)
+                .FirstOrDefault(c => c.Declerations.Any(d => d.Name == dependencyInfo.Name));
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace ResolveIt.Core.Model
     {
         string Name { get; }
         string Path { get; }
-        ISolutionInfo Solution { get; }
+        ISolutionInfo Solution { get; set; }
         IList<ICodeFileInfo> CodeFiles { get; }
         IList<IReferenceInfo> References { get; }
         void AddCodeFile(ICodeFileInfo codeFile);

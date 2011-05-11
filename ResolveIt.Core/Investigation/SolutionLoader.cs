@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -10,6 +9,7 @@ namespace ResolveIt.Core.Investigation
     public class SolutionLoader : ILoadSolutionInfo
     {
         private readonly ILoadProjectInfo projectLoader;
+        private SolutionInfo solution;
 
         public SolutionLoader(ILoadProjectInfo projectLoader)
         {
@@ -22,10 +22,10 @@ namespace ResolveIt.Core.Investigation
                 throw new FileNotFoundException("Unable to find file", filePath);
 
             var file = new FileInfo(filePath);
-            var solution = new SolutionInfo(file.Name, file.DirectoryName);
+            solution = new SolutionInfo(file.Name, file.DirectoryName);
 
             foreach (var project in ResolveProjectFilesFrom(file))
-                solution.AddProject(new ProjectInfo(project.Name, project.Path, solution));
+                solution.AddProject(project);
 
             return solution;
         }
@@ -39,9 +39,17 @@ namespace ResolveIt.Core.Investigation
                 var matches = new Regex("[.A-Za-z0-9\\\\]*.csproj").Matches(content);
 
                 projects = matches.Cast<Match>()
-                    .Select(match => projectLoader.FromFile(new FileInfo(string.Format("{0}\\{1}", file.DirectoryName, match.Value))));
+                    .Where(match => File.Exists(string.Format("{0}\\{1}", file.DirectoryName, match.Value)))
+                    .Select(match => ProjectInfoFrom(file, match));
             }
             return projects;
+        }
+
+        private IProjectInfo ProjectInfoFrom(FileInfo file, Match match)
+        {
+            var projectInfo = projectLoader.FromFile(new FileInfo(string.Format("{0}\\{1}", file.DirectoryName, match.Value)));
+            projectInfo.Solution = solution;
+            return projectInfo;
         }
     }
 }

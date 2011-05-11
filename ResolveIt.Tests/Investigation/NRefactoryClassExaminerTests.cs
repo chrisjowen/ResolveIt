@@ -8,9 +8,9 @@ using Rhino.Mocks;
 namespace ResolveIt.Tests.Investigation
 {
     [TestFixture]
-    public class NRefactoryClassExaminerTests
+    public class NRefactoryDeclerationExaminerTests
     {
-        private readonly IExamineSourceCodeForDependencies sourceExaminer = new NRefactorySourceCodeExaminer();
+        private readonly IExamineSourceCodeForDeclerations sourceExaminer = new NRefactoryDeclerationExaminer();
         private ICodeFileInfo codeFile;
 
         [SetUp]
@@ -25,69 +25,34 @@ namespace ResolveIt.Tests.Investigation
         }
 
         [Test]
-        public void ShouldTellMeTheInfoAboutASuperClassOfAGivenClass()
+        public void ShouldTellMeAboutAnyClassDeclerationsWithinCode()
         {
-            SetupCodeFile(@"public class Foo : Bar {  }");
+            SetupCodeFile(@"public class Foo  {  } public class Bar  {  }");
             var types = sourceExaminer.ExamineSource(codeFile);
             Assert.That(types.Count(), Is.EqualTo(2));
-            Assert.That(types.HasADependencyCalled("Foo"));
-            Assert.That(types.HasADependencyCalled("Bar"));
-        }
-
-
-        [Test]
-        public void ShouldTellMeTheNameOfAnyInterfacesFoundOnAGivenClass()
-        {
-            SetupCodeFile(@"public class Foo : IBar {  }");
-            var types = sourceExaminer.ExamineSource(codeFile);
-            Assert.That(types.HasADependencyCalled("Foo"));
-            Assert.That(types.HasADependencyCalled("IBar"));
+            Assert.That(types.HasADeclerationCalled("Foo"));
+            Assert.That(types.HasADeclerationCalled("Bar"));
         }
 
         [Test]
-        public void ShouldTellMeAboutTheDependenciesAtFieldLevel()
+        public void ShouldTellMeAboutAnyEnumDeclerationsWithinCode()
         {
-            SetupCodeFile(@"public class Foo { Bar b = new Bar(); }");
+            SetupCodeFile(@"public enum Foo{First} public enum Bar{First}");
             var types = sourceExaminer.ExamineSource(codeFile);
             Assert.That(types.Count(), Is.EqualTo(2));
-            Assert.That(types.HasADependencyCalled("Foo"));
-            Assert.That(types.HasADependencyCalled("Bar"));
+            Assert.That(types.HasADeclerationCalled("Foo"));
+            Assert.That(types.HasADeclerationCalled("Bar"));
         }
 
         [Test]
-        public void ShouldTellMeAboutTheDependenciesAtLocalVarLevel()
+        public void ShouldTellMeAboutAnyInterfaceDeclerationsWithinCode()
         {
-            SetupCodeFile(@"public class Foo { public void FooMethod() { Bar b = new Bar(); } }");
+            SetupCodeFile(@"public interface IFoo{} public interface IBar{}");
             var types = sourceExaminer.ExamineSource(codeFile);
-            Assert.That(types.Count(), Is.EqualTo(3));
-            Assert.That(types.HasADependencyCalled("Foo"));
-            Assert.That(types.HasADependencyCalled("Bar"));
+            Assert.That(types.Count(), Is.EqualTo(2));
+            Assert.That(types.HasADeclerationCalled("IFoo"));
+            Assert.That(types.HasADeclerationCalled("IBar"));
         }
-
-        [Test]
-        public void ShouldTellMeTheNameOfAnyDepndenciesWhenCasting()
-        {
-            SetupCodeFile(@"public class Foo { public void FooMethod() { return (Bar)""abc""; } }");
-            var types = sourceExaminer.ExamineSource(codeFile);
-            Assert.That(types.HasADependencyCalled("Bar"));
-        }
-
-        [Test]
-        public void ShouldTellMeTheNameOfAnyDepndenciesUsedInGenericObjectConstruction()
-        {
-            SetupCodeFile(@"public class Foo { public void FooMethod() { return new List<Bar>(); } }");
-            var types = sourceExaminer.ExamineSource(codeFile);
-            Assert.That(types.HasADependencyCalled("Bar"));
-        }
-
-        [Test]
-        public void ShouldTellMeTheNameOfAnyDepndenciesUsedInGenericConstructor()
-        {
-            SetupCodeFile(@"public class Foo<Bar> {  } }");
-            var types = sourceExaminer.ExamineSource(codeFile);
-            Assert.That(types.HasADependencyCalled("Bar"));
-        }
+        
     }
-
-
 }

@@ -8,7 +8,8 @@ namespace ResolveIt.Core.Model
         string Name { get; }
         string Path { get; }
         ProjectInfo Project { get; set; }
-        IList<IDependencyInfo> Dependencies { get; }
+        ISolutionInfo Solution { get; }
+        IList<IDeclerationInfo> Declerations { get; }
         FileInfo AsFile();
         string  GetContent();
     }

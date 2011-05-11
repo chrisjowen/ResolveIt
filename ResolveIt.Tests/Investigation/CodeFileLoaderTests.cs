@@ -13,35 +13,35 @@ namespace ResolveIt.Tests.Investigation
     public class CodeFileLoaderTests
     {
         private ILoadCodeFileInfo codeFileLoader;
-        private IExamineSourceCodeForDependencies dependencyExaminer;
+        private IExamineSourceCodeForDeclerations declerationExaminer;
         const string PathToCodeFile = @"TestData\WellItCouldWork\RootPathClass.cs";
 
 
         [SetUp]
         public void BeforeEachTest()
         {
-            dependencyExaminer = MockRepository.GenerateStub<IExamineSourceCodeForDependencies>();
-            codeFileLoader = new CodeFileLoader(dependencyExaminer);
+            declerationExaminer = MockRepository.GenerateStub<IExamineSourceCodeForDeclerations>();
+            codeFileLoader = new CodeFileLoader(declerationExaminer);
         }
 
         [Test]
         public void ShouldLoadCodeFileInfo()
         {
             var file = new FileInfo(PathToCodeFile);
-            var dependencies = new List<IDependencyInfo>
+            var dependencies = new List<IDeclerationInfo>
             {
-                new DependencyInfo(null, null)
+                new DeclerationInfo(null, null)
             };
 
-            dependencyExaminer
+            declerationExaminer
                 .Stub(examiner => examiner.ExamineSource(Arg<CodeFileInfo>.Is.Anything))
                 .Return(dependencies);
             
             var codeFileInfo = codeFileLoader.FromFile(file);
             Assert.That(codeFileInfo.Name, Is.EqualTo("RootPathClass.cs"));
             Assert.That(codeFileInfo.Path, Is.EqualTo(@"c:\projects\ResolveIt\ResolveIt.Tests\bin\Debug\TestData\WellItCouldWork"));
-            Assert.That(codeFileInfo.Dependencies.Count(), Is.EqualTo(1));
-            Assert.That(codeFileInfo.Dependencies.First(), Is.EqualTo(dependencies.First()));
+            Assert.That(codeFileInfo.Declerations.Count(), Is.EqualTo(1));
+            Assert.That(codeFileInfo.Declerations.First(), Is.EqualTo(dependencies.First()));
         }
     }
 

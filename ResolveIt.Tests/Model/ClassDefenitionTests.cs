@@ -11,7 +11,7 @@ namespace ResolveIt.Tests.Model
         {
             var codeFile = new CodeFileInfo(string.Empty, string.Empty);
             const string className = "Class";
-            var aClass = new DependencyInfo(className, codeFile);
+            var aClass = new DeclerationInfo(className, codeFile);
             Assert.That(aClass.Name, Is.EqualTo(className));
             Assert.That(aClass.CodeFileInfo, Is.EqualTo(codeFile));
         }
