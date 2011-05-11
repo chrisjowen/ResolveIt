@@ -43,6 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildCreation\BuildCodeFiles.cs" />
+    <Compile Include="BuildCreation\BuildFilesCompiler.cs" />
+    <Compile Include="BuildCreation\CompilationResult.cs" />
+    <Compile Include="BuildCreation\ICompileBuildFiles.cs" />
     <Compile Include="Investigation\CodeFileLoader.cs" />
     <Compile Include="Investigation\DeclerationComparer.cs" />
     <Compile Include="Investigation\NRefactoryDependencyExaminer.cs" />
@@ -70,6 +74,7 @@
     <Compile Include="SyntaxHelpers\TypeExt.cs" />
     <Compile Include="SyntaxHelpers\XElementExt.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

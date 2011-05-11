@@ -21,33 +21,38 @@ namespace ResolveIt.Core.Investigation
 
         public IEnumerable<IDependencyInfo> ExamineSource(ICodeFileInfo codeFile, ISolutionInfo solution)
         {
+            var dependencyInfos = ExamineSource(codeFile, solution, new List<ICodeFileInfo>()).Distinct(new DependencyComparer());
+            return dependencyInfos;
+        }
+
+        private IEnumerable<IDependencyInfo> ExamineSource(ICodeFileInfo codeFile, ISolutionInfo solution, IList<ICodeFileInfo> parsedCodeFiles)
+        {
             var result = GetCompilationResult(codeFile.GetContent());
             var nodes = result.Flatten();
-            var resolvedDependencies = new List<IDependencyInfo>();
 
 
-            var dependencies =  nodes.Select(node => new DependencyTypeFactory().For(node))
+            var dependencies = nodes.Select(node => new DependencyTypeFactory().For(node))
                 .Where(dependency => dependency != null)
                 .Distinct(new DependencyComparer()).ToList();
+
+            parsedCodeFiles.Add(codeFile);
 
             foreach (var dependencyInfo in dependencies)
             {
                 dependencyInfo.CodeFileInfo = solution.FindCodeFileFor(dependencyInfo);
-                resolvedDependencies.Add(dependencyInfo);
             }
 
             var codeFileInfos = dependencies
-                .Where(d => !resolvedDependencies.Contains(d))
-                .Select(d=> d.CodeFileInfo)
-                .Where(d => d!=null)
-                .Distinct();
+                .Select(dependencyInfo => dependencyInfo.CodeFileInfo)
+                .Where(codeFileInfo => codeFileInfo != null && !parsedCodeFiles.Contains(codeFileInfo))
+                .Distinct().ToList();
 
             foreach (var code in codeFileInfos)
             {
-                dependencies.AddRange(ExamineSource(code, solution));
+                dependencies.AddRange(ExamineSource(code, solution, parsedCodeFiles));
             }
 
-            return dependencies;
+            return dependencies; 
         }
     }
 }

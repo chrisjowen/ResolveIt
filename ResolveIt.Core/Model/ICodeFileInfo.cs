@@ -7,6 +7,7 @@ namespace ResolveIt.Core.Model
     {
         string Name { get; }
         string Path { get; }
+        string FullPath { get; }
         ProjectInfo Project { get; set; }
         ISolutionInfo Solution { get; }
         IList<IDeclerationInfo> Declerations { get; }

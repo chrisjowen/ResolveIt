@@ -26,7 +26,7 @@ namespace ResolveIt.Core.Model
             return new FileInfo(FullPath);
         }
 
-        protected string FullPath
+        public string FullPath
         {
             get { return string.Format(@"{0}\{1}", Path, Name); }
         }

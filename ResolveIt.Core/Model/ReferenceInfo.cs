@@ -12,6 +12,11 @@ namespace ResolveIt.Core.Model
             get { return !String.IsNullOrEmpty(Path); }
         }
 
+        public string FullPath
+        {
+            get { return string.IsNullOrEmpty(Path) ? Name  + ".dll" : string.Format("{0}/{1}", Path, Name); }
+        }
+
         public ReferenceInfo(string name, string path)
         {
             Name = name;
@@ -28,5 +33,6 @@ namespace ResolveIt.Core.Model
     {
         string Name { get; }
         bool IsExternal { get; }
+        string FullPath { get;  }
     }
 }

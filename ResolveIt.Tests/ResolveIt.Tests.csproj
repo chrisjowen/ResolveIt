@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildCreation\BuildFilesCompilerTests.cs" />
     <Compile Include="Investigation\CodeFileLoaderTests.cs" />
     <Compile Include="Investigation\NRefactoryClassExaminerTests.cs" />
     <Compile Include="Investigation\NRefactoryDependencyExaminerTests.cs" />

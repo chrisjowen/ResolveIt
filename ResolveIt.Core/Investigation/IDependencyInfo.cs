@@ -7,12 +7,18 @@ namespace ResolveIt.Core.Investigation
     {
         string Name { get;  }
         ICodeFileInfo CodeFileInfo { get; set; }
+        bool IsExternal { get; }
     }
 
     public class DependencyInfo : IDependencyInfo
     {
         public string Name { get; private set; }
         public ICodeFileInfo CodeFileInfo { get; set; }
+
+        public bool IsExternal
+        {
+            get { return CodeFileInfo == null; }
+        }
 
         public DependencyInfo(string name)
         {

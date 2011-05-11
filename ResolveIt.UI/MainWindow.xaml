@@ -20,7 +20,7 @@
                 </TextBlock>
             </Border>
             <Border Background="White" BorderBrush="Black" BorderThickness="1">
-                <Controls:DependencyViewer x:Name="Declerations" ></Controls:DependencyViewer>
+                <Controls:DependencyViewer x:Name="DependencyViewer" ></Controls:DependencyViewer>
             </Border>
     </DockPanel>
 </Window>

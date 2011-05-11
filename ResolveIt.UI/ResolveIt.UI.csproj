@@ -56,12 +56,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ApplicationWiringFactory.cs" />
+    <Compile Include="BuilderWindow.xaml.cs">
+      <DependentUpon>BuilderWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DependencyViewer.xaml.cs">
       <DependentUpon>DependencyViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="SolutionTreeView.xaml.cs">
       <DependentUpon>SolutionTreeView.xaml</DependentUpon>
     </Compile>
+    <Page Include="BuilderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DependencyViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

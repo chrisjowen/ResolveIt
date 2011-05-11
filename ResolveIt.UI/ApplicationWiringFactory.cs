@@ -1,4 +1,6 @@
-﻿using ResolveIt.Core.Investigation;
+﻿using System;
+using ResolveIt.Core.BuildCreation;
+using ResolveIt.Core.Investigation;
 
 namespace ResolveIt.UI
 {
@@ -15,6 +17,11 @@ namespace ResolveIt.UI
         public IExamineSourceCodeForDependencies GetDependencyExaminer()
         {
             return new NRefactoryDependencyExaminer();
+        }
+
+        public ICompileBuildFiles GetBuildFileCompiler()
+        {
+            return new BuildFilesCompiler();
         }
     }
 }
